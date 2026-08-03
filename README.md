@@ -5,26 +5,25 @@ Bootstrap ArgoCD into the k3s cluster. ArgoCD becomes the single tool used to de
 ## Install
 
 ```
-kubectl apply -f manifests/namespace.yaml
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+make install
 ```
 
 ## Wait for ArgoCD to be ready
 
 ```
-kubectl wait --for=condition=available --timeout=120s deployment/argocd-server -n argocd
+make wait
 ```
 
 ## Get the initial admin password
 
 ```
-kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
+make password
 ```
 
 ## Access the UI
 
 ```
-kubectl port-forward svc/argocd-server -n argocd 8080:443
+make ui
 ```
 
 Then open https://localhost:8080 and log in with username `admin` and the password from above.
@@ -32,17 +31,15 @@ Then open https://localhost:8080 and log in with username `admin` and the passwo
 ## Point ArgoCD at homelab-apps
 
 ```
-kubectl apply -f manifests/root-app.yaml
+make apply
 ```
 
 ArgoCD will start watching https://github.com/mattjmorrison/homelab-apps and deploy everything defined there.
 
 ## Upgrade ArgoCD
 
-Re-apply the install manifest with a specific version tag:
-
 ```
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.0/manifests/install.yaml
+make upgrade
 ```
 
 ArgoCD handles its own rolling update.
