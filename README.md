@@ -8,34 +8,6 @@ Bootstrap ArgoCD into the k3s cluster. ArgoCD becomes the single tool used to de
 make install
 ```
 
-## Wait for ArgoCD to be ready
-
-```
-make wait
-```
-
-## Get the initial admin password
-
-```
-make password
-```
-
-## Access the UI
-
-```
-make ui
-```
-
-Then open https://localhost:8080 and log in with username `admin` and the password from above.
-
-## Point ArgoCD at homelab-apps
-
-```
-make apply
-```
-
-ArgoCD will start watching https://github.com/mattjmorrison/homelab-apps and deploy everything defined there.
-
 ## Upgrade ArgoCD
 
 ```
