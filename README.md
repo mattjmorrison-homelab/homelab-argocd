@@ -1,5 +1,9 @@
 # homelab-argocd
 
+[Homelab Docs](https://github.com/mattjmorrison/homelab/blob/main/docs/INDEX.md)
+
+---
+
 Bootstrap ArgoCD into the k3s cluster. ArgoCD becomes the single tool used to deploy everything else to the cluster going forward.
 
 ## Install
