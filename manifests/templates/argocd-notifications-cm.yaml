@@ -15,7 +15,7 @@ data:
       discord:
         method: POST
         body: |
-          {"content": "✅ **{{.app.metadata.name}}** deployed — revision `{{.app.status.sync.revision}}`"}
+          {"content": "✅ **{{ "{{" }}.app.metadata.name{{ "}}" }}** deployed — revision `{{ "{{" }}.app.status.sync.revision{{ "}}" }}`"}
 
   trigger.on-deployed: |
     - when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
