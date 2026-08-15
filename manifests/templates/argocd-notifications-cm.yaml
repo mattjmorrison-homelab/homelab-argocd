@@ -17,13 +17,26 @@ data:
         body: |
           {"content": "✅ **{{ "{{" }}.app.metadata.name{{ "}}" }}** deployed — revision `{{ "{{" }}.app.status.sync.revision{{ "}}" }}`"}
 
+  template.sync-failed: |
+    webhook:
+      discord:
+        method: POST
+        body: |
+          {"content": "❌ **{{ "{{" }}.app.metadata.name{{ "}}" }}** sync failed — revision `{{ "{{" }}.app.status.sync.revision{{ "}}" }}`"}
+
   trigger.on-deployed: |
     - when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
       oncePer: app.status.sync.revision
       send: [deploy-completed]
+
+  trigger.on-sync-failed: |
+    - when: app.status.operationState.phase in ['Error', 'Failed']
+      oncePer: app.status.sync.revision
+      send: [sync-failed]
 
   subscriptions: |
     - recipients:
       - discord
       triggers:
       - on-deployed
+      - on-sync-failed
