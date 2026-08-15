@@ -1,5 +1,3 @@
-{}
-
 verify:
   image:
     repository: alpine
