@@ -1,5 +1,7 @@
 # homelab-argocd
 
+## TODO: upgrade to helm
+
 ## Goal
 
 Bootstrap ArgoCD into the k3s cluster. ArgoCD becomes the single tool used to deploy everything else to the cluster going forward.
@@ -29,7 +31,7 @@ Forward the ArgoCD server port locally:
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
-Then open https://localhost:8080 in a browser.
+Then open <https://localhost:8080> in a browser.
 
 ### 4. Get the initial admin password
 
